@@ -23,12 +23,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/vordgi/classnames-minifier.git"
+    "url": "git://github.com/vitaliemiron/classnames-minifier.git"
   },
   "author": {
-    "name": "Savelyev Alexander",
-    "email": "vordgi1@gmail.com",
-    "url": "https://github.com/vordgi/"
+    "name": "Vitalie Miron",
+    "email": "mironvitaliev@gmail.com",
+    "url": "https://github.com/vitaliemiron/"
   },
   "license": "MIT",
   "devDependencies": {
