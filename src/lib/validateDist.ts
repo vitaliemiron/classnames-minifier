@@ -41,28 +41,43 @@ const validateDist = (pluginOptions: Config) => {
   } else {
     isImpreciseDist = true;
   }
+
   if (isImpreciseDist) {
     console.log(
-      'classnames-minifier: Changessssss found in package configuration. Cleaning the dist folder...'
+      'classnames-minifier: Changes found in package configuration. Cleaning the dist folder...'
     );
-    console.log('here 2');
 
     // New code to remove contents without removing the directory
     const files = fs.readdirSync(distDir);
     for (const file of files) {
       const currentPath = path.join(distDir, file);
       if (fs.lstatSync(currentPath).isDirectory()) {
-        fs.rmSync(currentPath, { recursive: true, force: true });
+        // Check if the directory is named "cache"
+        if (path.basename(currentPath) === 'cache') {
+          // Remove everything inside the "cache" directory but not the directory itself
+          const cacheFiles = fs.readdirSync(currentPath);
+          for (const cacheFile of cacheFiles) {
+            const cacheFilePath = path.join(currentPath, cacheFile);
+            if (fs.lstatSync(cacheFilePath).isDirectory()) {
+              fs.rmSync(cacheFilePath, { recursive: true, force: true });
+            } else {
+              fs.unlinkSync(cacheFilePath);
+            }
+          }
+        } else {
+          // Recursively remove the directory and its contents
+          fs.rmSync(currentPath, { recursive: true, force: true });
+        }
       } else {
+        // Remove the file
         fs.unlinkSync(currentPath);
       }
     }
 
     console.log(
-      'classnames-minifier: Changesrrrrrr found in package configuration. Dist folder cleared'
+      'classnames-minifier: Changes found in package configuration. Dist folder cleared'
     );
   }
-  console.log('here 1');
   if (!fs.existsSync(manifestDir))
     fs.mkdirSync(manifestDir, { recursive: true });
   fs.writeFileSync(
