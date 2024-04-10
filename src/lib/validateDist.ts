@@ -43,8 +43,9 @@ const validateDist = (pluginOptions: Config) => {
   }
   if (isImpreciseDist) {
     console.log(
-      'classnames-minifier: Changes found in package configuration. Cleaning the dist folder...'
+      'classnames-minifier: Changessssss found in package configuration. Cleaning the dist folder...'
     );
+    console.log('here 2');
 
     // New code to remove contents without removing the directory
     const files = fs.readdirSync(distDir);
@@ -58,9 +59,10 @@ const validateDist = (pluginOptions: Config) => {
     }
 
     console.log(
-      'classnames-minifier: Changes found in package configuration. Dist folder cleared'
+      'classnames-minifier: Changesrrrrrr found in package configuration. Dist folder cleared'
     );
   }
+  console.log('here 1');
   if (!fs.existsSync(manifestDir))
     fs.mkdirSync(manifestDir, { recursive: true });
   fs.writeFileSync(
