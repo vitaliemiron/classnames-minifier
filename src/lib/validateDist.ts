@@ -15,9 +15,18 @@ const readManifest = (manifestPath: string) => {
 const validateDist = (pluginOptions: Config) => {
   const { cacheDir, distDir, prefix, reservedNames } = pluginOptions;
 
+  // Check if cacheDir or distDir is not specified
   if (!cacheDir || !distDir) {
     console.log(
       'classnames-minifier: Failed to check the dist folder because cacheDir or distDir is not specified'
+    );
+    return;
+  }
+
+  // Check if distDir exists, create it if it doesn't
+  if (!fs.existsSync(distDir)) {
+    console.log(
+      `classnames-minifier: ${distDir} does not exist. Creating directory...`
     );
     return;
   }
